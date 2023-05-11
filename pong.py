@@ -1,18 +1,18 @@
 from pygame import *
 
 
-window = display.set_mode((1920, 1080))
+window = display.set_mode((800, 600))
 
-background = transform.scale(image.load("background.jpg"), (1920, 1080))
+background = transform.scale(image.load("background.jpg"), (800, 600))
 
 
 class GameSprite(sprite.Sprite):
 
-    def __init__(self, player_image, player_x, player_y, player_speed):
+    def __init__(self, player_image, player_x, player_y, player_speed, x, y):
  
-        super().__init__()
+        sprite.Sprite.__init__(self)
   
-        self.image = transform.scale(image.load(player_image))
+        self.image = transform.scale(image.load(player_image),(x, y))
    
         self.speed = player_speed
    
@@ -56,7 +56,11 @@ class Player(GameSprite):
 
 #sprites
 
-а = Player("ball.png", 250, 250, 5)
+a = Player("ball.png", 250, 250, 5, 45, 45)
+
+b = Player("r1.png", 40, 250, 10, 30, 170)
+
+c = Player("r2.png", 400, 250, 10, 30, 170)
 
 #sprites
 
@@ -76,7 +80,9 @@ while running:
             running = False
  
     window.blit(background, (0, 0))
- 
+    a.reset()
+    b.reset()
+    c.reset()
     clock.tick(FPS)
  
     display.update()
